@@ -118,30 +118,30 @@ function extract(imageData, tileWidth, tileHeight, tolerance, allowFlipping) {
 	function compareTileWith(tileX, tileY, tile) { // tile is the ImageData.data array of an existing unique tile
 		// Always try normal comparison first
 		if (compareOrientation(tileX, tileY, tile, 'normal')) {
-			return true;
+			return { match: true, orientation: 'normal' }; // Return orientation
 		}
 
 		// If flipping is not allowed, stop here
 		if (!allowFlipping) {
-			return false;
+			return { match: false }; // No match
 		}
 
 		// If flipping is allowed, check other orientations
 		// Try horizontal flip
 		if (compareOrientation(tileX, tileY, tile, 'hflip')) {
-			return true;
+			return { match: true, orientation: 'hflip' }; // Return orientation
 		}
 		// Try vertical flip
 		if (compareOrientation(tileX, tileY, tile, 'vflip')) {
-			return true;
+			return { match: true, orientation: 'vflip' }; // Return orientation
 		}
 		// Try both flips
 		if (compareOrientation(tileX, tileY, tile, 'hvflip')) {
-			return true;
+			return { match: true, orientation: 'hvflip' }; // Return orientation
 		}
 
 		// No match found in any allowed orientation
-		return false;
+		return { match: false }; // No match
 	}
 
 	var numCols = (sourceWidth / tileWidth) | 0;
@@ -150,24 +150,36 @@ function extract(imageData, tileWidth, tileHeight, tolerance, allowFlipping) {
 	var tiles = [];
 	var map = [];
 	var index;
+	var matchedOrientation;
 
 	for (var tileIndex = 0; tileIndex < numTiles; ++tileIndex) {
 		var tileX = (tileIndex % numCols) | 0;
 		var tileY = (tileIndex / numCols) | 0;
 
 		var tileExist = false;
+		matchedOrientation = 'normal'; // Default orientation
 
 		for (index = 0; index < tiles.length; ++index) {
-			if (compareTileWith(tileX, tileY, tiles[index].data)) {
+			const result = compareTileWith(tileX, tileY, tiles[index].data);
+			if (result.match) {
 				tileExist = true;
+				matchedOrientation = result.orientation; // Store the matched orientation
 				break;
 			}
 		}
 		if (!tileExist) {
 			tiles.push(createTileFrom());
+			matchedOrientation = 'normal'; // Newly added tile is always 'normal'
+			// index variable already holds the correct new index (tiles.length - 1)
+			// If the loop finished without break, index will be tiles.length.
+			// After push, the new index is tiles.length - 1. So we need to adjust.
+			if (index === tiles.length) {
+			    index = tiles.length -1;
+			}
 		}
 
-		map.push(index);
+		// Store both index and orientation
+		map.push({ index: index, orientation: matchedOrientation });
 
 		if (tileIndex % 32 == 0) {
 			sendProgress(tileIndex / numTiles);
