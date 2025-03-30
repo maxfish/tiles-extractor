@@ -2,7 +2,7 @@ self.onmessage = function (event) {
 	var data = event.data;
 
 	if (data.action == "extract")
-		extract(data.imageData, data.tileWidth, data.tileHeight, data.tolerance);
+		extract(data.imageData, data.tileWidth, data.tileHeight, data.tolerance, data.allowFlipping);
 };
 
 function sendStart() {
@@ -26,7 +26,7 @@ function sendResult(tiles, map, startTime) {
 	);
 }
 
-function extract(imageData, tileWidth, tileHeight, tolerance) {
+function extract(imageData, tileWidth, tileHeight, tolerance, allowFlipping) {
 	sendStart();
 
 	var startTime = new Date().getTime();
@@ -113,12 +113,20 @@ function extract(imageData, tileWidth, tileHeight, tolerance) {
 		return true;
 	}
 
-	// Checks if the image area at (tileX, tileY) matches the given tile in normal, h-flipped, v-flipped, or hv-flipped orientation.
+	// Checks if the image area at (tileX, tileY) matches the given tile
+	// Optionally checks for flipped orientations based on allowFlipping flag.
 	function compareTileWith(tileX, tileY, tile) { // tile is the ImageData.data array of an existing unique tile
-		// Try normal comparison
+		// Always try normal comparison first
 		if (compareOrientation(tileX, tileY, tile, 'normal')) {
 			return true;
 		}
+
+		// If flipping is not allowed, stop here
+		if (!allowFlipping) {
+			return false;
+		}
+
+		// If flipping is allowed, check other orientations
 		// Try horizontal flip
 		if (compareOrientation(tileX, tileY, tile, 'hflip')) {
 			return true;
@@ -131,7 +139,8 @@ function extract(imageData, tileWidth, tileHeight, tolerance) {
 		if (compareOrientation(tileX, tileY, tile, 'hvflip')) {
 			return true;
 		}
-		// No match in any orientation
+
+		// No match found in any allowed orientation
 		return false;
 	}
 

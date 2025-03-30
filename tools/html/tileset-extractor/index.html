@@ -5,8 +5,7 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title>Online Tileset Extractor</title>
-  <link media="screen" href="tileset-extractor.less" type="text/less" rel="stylesheet" />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.3.1/less.min.js"></script>
+  <link media="screen" href="tileset-extractor.css" type="text/css" rel="stylesheet" />
   <link type="text/css" rel="stylesheet"
     href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" />
   <script src="tileset-extractor.js"></script>
@@ -26,29 +25,33 @@
     <div io>
       <table>
         <tr>
-          <td>Tile width:</td>
+          <td>Tile size:</td>
           <td>
             <input type="number" name="tile-width" min="4" max="128" step="1" value="16">
-          </td>
-          <td>px</td>
-        </tr>
-        <tr>
-          <td>Tile height:</td>
-          <td>
+            x
             <input type="number" name="tile-height" min="4" max="128" step="1" value="16">
+            px
           </td>
-          <td>px</td>
         </tr>
         <tr>
           <td>Tolerance:</td>
           <td>
             <input type="number" name="tolerance" min="0" max="128" step="1" value="0">
+            px
           </td>
-          <td>px</td>
+        </tr>
+        <tr>
+          <td>Tiles flipping:</td>
+          <td>
+            <input type="checkbox" id="allow-flipping" checked>
+          </td>
         </tr>
       </table>
       <div console></div>
     </div>
+    <div align="center"><button id="process-button" disabled>Extract tiles</button></div>
+    <br />
+
     <progress value="0" max="1" hidden></progress>
     <div result hidden>
       <div tiles-wrapper>
@@ -67,6 +70,8 @@
         </div>
       </div>
     </div>
+
+
     <div info>
       <h4>What are tilemaps?</h4>
 
