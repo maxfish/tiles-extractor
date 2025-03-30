@@ -16,6 +16,7 @@ function onLoad() {
     const downloadTiledTMXLink = document.querySelector("a[download-tmx]");
     const processButton = document.getElementById("process-button");
     const allowFlippingCheckbox = document.getElementById("allow-flipping");
+    const exportColumnsInput = document.getElementById("export-columns-input");
 
     let map = null;
     let tiles = null;
@@ -145,7 +146,9 @@ function onLoad() {
         xmlTileSet.setAttribute("tilewidth", tileWidth);
         xmlTileSet.setAttribute("tileheight", tileHeight);
         xmlTileSet.setAttribute("tilecount", tiles.length);
-        xmlTileSet.setAttribute("columns", Math.min(8, tiles.length));
+        const desiredExportColsTMX = parseInt(exportColumnsInput.value, 10) || 8;
+        const actualExportColsTMX = Math.min(desiredExportColsTMX, tiles.length);
+        xmlTileSet.setAttribute("columns", actualExportColsTMX);
         const xmlImage = document.createElement("image");
         xmlImage.setAttribute("source", "tiles.png");
         xmlImage.setAttribute("width", extractedTilesWidth);
@@ -192,10 +195,13 @@ function onLoad() {
         xmlLayer.appendChild(xmlData);
         xmlMap.appendChild(xmlLayer);
 
+        const desiredExportCols = parseInt(exportColumnsInput.value, 10) || 8;
+        const actualExportCols = Math.min(desiredExportCols, tiles.length);
+
         console.log("TMX Export Debug:");
         console.log(" - Map Dims:", numCols, "x", numRows);
         console.log(" - Tile Dims:", tileWidth, "x", tileHeight);
-        console.log(" - Tileset: tilecount=", tiles.length, "columns=", Math.min(8, tiles.length));
+        console.log(" - Tileset: tilecount=", tiles.length, "columns=", actualExportCols);
         console.log(" - Tileset Image Dims:", extractedTilesWidth, "x", extractedTilesHeight);
         console.log(" - Layer Dims:", numCols, "x", numRows);
         console.log(" - CSV Data (first 100 chars):", gidArray.join(',').substring(0, 100), "...");
@@ -340,7 +346,7 @@ function onLoad() {
 
     function createTilesDataURL() {
         const numTiles = tiles.length;
-        const desiredCols = 8;
+        const desiredCols = parseInt(exportColumnsInput.value, 10) || 8;
         const numCols = Math.min(desiredCols, numTiles);
         const numRows = (numTiles > 0) ? Math.ceil(numTiles / numCols) : 1;
         
@@ -404,5 +410,17 @@ function onLoad() {
                 processButton.disabled = true;
             }
         });
+    });
+
+    // Add listener to update downloads when export columns change
+    exportColumnsInput.addEventListener('change', () => {
+        if (tiles && tiles.length > 0) { // Only update if results exist
+            // Regenerate tiles.png with new column count
+            downloadTilesLink.href = createTilesDataURL(); 
+            // Regenerate tiled.tmx with new column count
+            downloadTiledTMXLink.href = window.URL.createObjectURL(new Blob([exportTiledFormat()], { type: 'text/xml' }));
+            // Note: The visual tile display in div[tiles] does not need to change, 
+            // only the downloaded tiles.png layout.
+        }
     });
 }

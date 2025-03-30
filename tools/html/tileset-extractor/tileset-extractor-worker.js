@@ -174,7 +174,7 @@ function extract(imageData, tileWidth, tileHeight, tolerance, allowFlipping) {
 			// If the loop finished without break, index will be tiles.length.
 			// After push, the new index is tiles.length - 1. So we need to adjust.
 			if (index === tiles.length) {
-			    index = tiles.length -1;
+				index = tiles.length - 1;
 			}
 		}
 
