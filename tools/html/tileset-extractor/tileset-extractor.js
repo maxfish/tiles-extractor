@@ -349,7 +349,7 @@ function onLoad() {
         const desiredCols = parseInt(exportColumnsInput.value, 10) || 8;
         const numCols = Math.min(desiredCols, numTiles);
         const numRows = (numTiles > 0) ? Math.ceil(numTiles / numCols) : 1;
-        
+
         extractedTilesWidth = numCols * tileWidth;
         extractedTilesHeight = numRows * tileHeight;
         const canvas = document.createElement("canvas");
@@ -390,7 +390,7 @@ function onLoad() {
     loadDemoBigButton.addEventListener("click", function () {
         loadImage('tileset-extractor-demo-big.png');
     });
-    processButton.addEventListener('click', function() {
+    processButton.addEventListener('click', function () {
         if (source) {
             beginExtractionWorker();
         } else {
@@ -416,7 +416,7 @@ function onLoad() {
     exportColumnsInput.addEventListener('change', () => {
         if (tiles && tiles.length > 0) { // Only update if results exist
             // Regenerate tiles.png with new column count
-            downloadTilesLink.href = createTilesDataURL(); 
+            downloadTilesLink.href = createTilesDataURL();
             // Regenerate tiled.tmx with new column count
             downloadTiledTMXLink.href = window.URL.createObjectURL(new Blob([exportTiledFormat()], { type: 'text/xml' }));
             // Note: The visual tile display in div[tiles] does not need to change, 

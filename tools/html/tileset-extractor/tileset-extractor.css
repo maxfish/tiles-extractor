@@ -11,20 +11,24 @@ body {
   flex-direction: column;
   -webkit-flex-direction: column;
 }
+
 * {
   outline: none;
 }
+
 h2 {
   font-size: 14px;
   margin: 0 0 8px 0;
   padding: 0;
 }
+
 a {
   text-decoration: none;
   color: black;
   font-weight: 600;
   display: inline-block;
 }
+
 a[download] {
   border-radius: 2px;
   text-decoration: none;
@@ -34,10 +38,12 @@ a[download] {
   color: rgba(0, 0, 0, 0.75);
   margin: 12px 1px 1px;
 }
+
 a:hover {
   color: black;
   background: rgba(255, 255, 255, 0.5);
 }
+
 .frame {
   border-radius: 2px;
   background: #e3e3e3;
@@ -45,6 +51,7 @@ a:hover {
   padding: 20px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+
 .no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -54,6 +61,7 @@ a:hover {
   user-select: none;
   cursor: default;
 }
+
 div[stage] {
   padding: 32px;
   min-width: 640px;
@@ -63,6 +71,7 @@ div[stage] {
   flex-direction: column;
   -webkit-flex-direction: column;
 }
+
 div[stage] div[browse] {
   border-radius: 2px;
   background: #e3e3e3;
@@ -70,13 +79,16 @@ div[stage] div[browse] {
   padding: 20px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+
 div[stage] div[browse] div[demo] {
   float: right;
 }
+
 div[stage] div[io] {
   display: flex;
   display: -webkit-flex;
 }
+
 div[stage] div[io] table {
   border-radius: 2px;
   background: #e3e3e3;
@@ -85,6 +97,7 @@ div[stage] div[io] table {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   padding-right: 96px;
 }
+
 div[stage] div[io] table td:first-child {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -95,6 +108,7 @@ div[stage] div[io] table td:first-child {
   cursor: default;
   padding-right: 12px;
 }
+
 div[stage] div[io] table td:last-child {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -105,6 +119,7 @@ div[stage] div[io] table td:last-child {
   cursor: default;
   color: rgba(0, 0, 0, 0.5);
 }
+
 div[stage] div[io] div[console] {
   border-radius: 2px;
   background: #e3e3e3;
@@ -122,35 +137,44 @@ div[stage] div[io] div[console] {
   padding-top: 24px;
   margin-left: 12px;
 }
+
 div[stage] div[io] div[console] p {
   margin: 0;
   padding: 0;
   line-height: 1.25em;
 }
+
 div[stage] div[io] div[console] p span:last-child {
   float: right;
   display: inline-block;
 }
+
 div[stage] div[io] div[console] p[fine] {
   color: rgba(0, 0, 0, 0.4);
 }
+
 div[stage] div[io] div[console] p[error] {
   color: red;
 }
+
 div[stage] progress {
   display: block;
   width: 100%;
   margin-bottom: 20px;
 }
+
 div[stage] progress[hidden] {
   display: none;
 }
+
 div[stage] div[result] {
   display: block;
 }
+
 div[stage] div[result][hidden] {
   display: none;
 }
+
 div[stage] div[result] div[tiles-wrapper] {
   border-radius: 2px;
   background: #e3e3e3;
@@ -158,12 +182,14 @@ div[stage] div[result] div[tiles-wrapper] {
   padding: 20px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+
 div[stage] div[result] div[tiles-wrapper] div[tiles] canvas {
   margin: 1px;
   padding: 2px;
   border-radius: 2px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+
 div[stage] div[result] div[tileset-wrapper] {
   border-radius: 2px;
   background: #e3e3e3;
@@ -171,16 +197,20 @@ div[stage] div[result] div[tileset-wrapper] {
   padding: 20px;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+
 div[stage] div[result] div[tileset-wrapper] div[tileset] {
   overflow: auto;
   max-height: 480px;
 }
+
 div[stage] div[result] div[tileset-wrapper] div[tileset]:not(:empty) {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
+
 div[stage] div[result] div[tileset-wrapper] div[tileset]:not(:empty) canvas {
   margin: 1px;
 }
+
 div[stage] div[info] {
   border-radius: 2px;
   background: #e3e3e3;
