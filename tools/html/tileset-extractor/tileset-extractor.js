@@ -181,9 +181,9 @@ function onLoad() {
                     map: map,
                     numCols: numCols,
                     numRows: numRows
-                })], {type: 'text/plain'}));
+                })], { type: 'text/plain' }));
                 downloadTiledTMXLink.download = "tiled.tmx";
-                downloadTiledTMXLink.href = window.URL.createObjectURL(new Blob([exportTiledFormat()], {type: 'text/xml'}));
+                downloadTiledTMXLink.href = window.URL.createObjectURL(new Blob([exportTiledFormat()], { type: 'text/xml' }));
             }
         };
         worker.postMessage({

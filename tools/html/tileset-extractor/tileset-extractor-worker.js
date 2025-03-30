@@ -97,8 +97,8 @@ function extract(imageData, tileWidth, tileHeight, tolerance) {
 				for (var i = 0; i < 4; ++i) {
 					// Ensure indices are valid before accessing array elements
 					if (targetIndex >= tileData.length || sourceIndex + i >= sourceArray.length) {
-						 console.error("Index out of bounds during comparison:", {targetIndex, tileDataLength: tileData.length, sourceIndex, i, sourceArrayLength: sourceArray.length});
-						 return false; // Critical error: index out of bounds
+						console.error("Index out of bounds during comparison:", { targetIndex, tileDataLength: tileData.length, sourceIndex, i, sourceArrayLength: sourceArray.length });
+						return false; // Critical error: index out of bounds
 					}
 					difference += Math.abs(tileData[targetIndex++] - sourceArray[sourceIndex + i]);
 				}
