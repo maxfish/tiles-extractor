@@ -8,4 +8,4 @@ Improvements on the original version:
 - Can detect H/V flipped tiles
 - Customizable number of columns for the tiles.png export
 
-[Source of the original version] (https://github.com/andremichelle/platforms)
+[Source of the original version](https://github.com/andremichelle/platforms)
